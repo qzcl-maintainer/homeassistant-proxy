@@ -47,7 +47,7 @@ Generate the dhparams.pem file, which is used for SSL/TLS key exchange.
 
 ```bash
 cd /etc/nginx/ssl
-sudo openssl dhparam -out dhparams.pem 2048
+openssl dhparam -out dhparams.pem 2048
 exit
 ```
 
