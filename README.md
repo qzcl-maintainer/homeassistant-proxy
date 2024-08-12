@@ -1,46 +1,82 @@
-# homeassistant-proxy
-Author: maintainer@qzconsultancy.com
-Last Update: 11-Aug-2024
-### Purpose: Create a Home Assistant Proxy running on NGINX and using SSL for securing your HA Installation
+# Home Assistant Proxy with NGINX and Docker
 
-### Prerequisites
-1. Home Assistant must be running and working.
-2. Docker must be installed and running.
-3. Generate your ssl certificates using certbot and place in the `.ssl` directory.
+**Author:** maintainer@qzconsultancy.com  
+**Last Update:** 11-Aug-2024
 
-### Instructions
-1. Start your docker container running on port 80 first
-```
+## Overview
+This guide provides step-by-step instructions to set up a reverse proxy for your Home Assistant installation using NGINX and Docker. The proxy is configured to secure your Home Assistant instance with SSL certificates.
+
+## Prerequisites
+Before proceeding, ensure that the following are in place:
+1. **Home Assistant** is running and fully operational.
+2. **Docker** is installed and running on your system.
+3. SSL certificates have been generated using `certbot` and stored in the `.ssl` directory.
+
+## Environment
+- **Home Assistant Version:** 2024.8.1
+- **Hardware:** Raspberry Pi 4
+
+## Setup Instructions
+
+### 1. Clone the Repository
+First, clone the repository containing the configuration files.
+```bash
 cd /opt
-git clone https://github.com/qzcl-maintainer/homeassistant-proxy.git
+sudo git clone https://github.com/qzcl-maintainer/homeassistant-proxy.git
 cd homeassistant-proxy
-docker compose -f compose-http.yaml -d
 ```
 
-2. Connect to your Docker container
-```docker container exec -it homeassistant-proxy-nginx-1 bash```
+### 2. Start the HTTP Proxy (Without SSL)
+Launch the proxy using the HTTP configuration to verify that it works correctly.
 
-3. Generate your dhparams file
+```bash
+docker compose -f compose-http.yaml up -d
 ```
+
+### 3. Access the NGINX Container
+Connect to the running NGINX Docker container to generate Diffie-Hellman parameters.
+
+```bash
+docker container exec -it homeassistant-proxy-nginx-1 bash
+```
+
+### 4. Generate Diffie-Hellman Parameters
+Generate the dhparams.pem file, which is used for SSL/TLS key exchange.
+
+```bash
 cd /etc/nginx/ssl
 sudo openssl dhparam -out dhparams.pem 2048
 exit
 ```
 
-4. Bring the instance down
-```docker compose down```
+### 5. Shut Down the Proxy
+After verifying the HTTP proxy setup, bring down the container to apply SSL configurations.
 
-5. Edit the `default.conf` and change the following parameters to match your installation
-- server_name
-- ssl_certificate file name
-- ssl_certificate_key file name
-- proxy_pass IPv4 Address and Port
+```bash
+docker compose down
+```
 
-The `proxy_pass` value should be your Home Assistant IP and Port.
+### 6. Edit the NGINX Configuration
+Modify the `default.conf` file to match your Home Assistant installation:
 
-6. Bring your Proxy online with SSL Configuration.
-```docker compose up -d```
+- **server_name:** Your server's domain name.
+- **ssl_certificate:** The file path to your SSL certificate.
+- **ssl_certificate_key:** The file path to your SSL certificate key.
+- **proxy_pass:** The IP address and port of your Home Assistant instance.
 
-### References:
+### 7. Start the HTTPS Proxy (With SSL)
+Finally, bring the proxy online with SSL enabled.
+
+```bash
+docker compose -f compose.yaml up -d
+```
+
+### 8. Confirm Access to Your New Proxy
+Navigate to `https://your_server_name:8124`. You should see the Home Assistant Dashboard.
+
+
+
+### Troubleshooting
+If you encounter any issues during setup, refer to the community guides:
 1. [Community Guide Reference 1](https://community.home-assistant.io/t/reverse-proxy-using-nginx/196954)
 2. [Community Guide Reference 2](https://community.home-assistant.io/t/home-assistant-with-nginx-reverse-proxy/628138/3)
