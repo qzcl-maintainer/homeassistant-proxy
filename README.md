@@ -32,7 +32,7 @@ mkdir ssl
 Launch the proxy using the HTTP configuration to verify that it works correctly.
 
 ```bash
-docker compose -f compose-http.yml up
+docker compose -f compose-http.yml up --detach
 ```
 
 ### 3. Access the NGINX Container
@@ -70,7 +70,7 @@ Modify the `default.conf` file to match your Home Assistant installation:
 Finally, bring the proxy online with SSL enabled.
 
 ```bash
-docker compose up -d
+docker compose up --detach
 ```
 
 ### 8. Confirm Access to Your New Proxy
