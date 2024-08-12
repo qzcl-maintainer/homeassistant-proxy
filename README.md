@@ -11,10 +11,10 @@ Last Update: 11-Aug-2024
 ### Instructions
 1. Start your docker container running on port 80 first
 ```
-`cd /opt`
-`git clone https://github.com/qzcl-maintainer/homeassistant-proxy.git`
-`cd homeassistant-proxy`
-`docker compose -f compose-http.yaml -d`
+cd /opt
+git clone https://github.com/qzcl-maintainer/homeassistant-proxy.git
+cd homeassistant-proxy
+docker compose -f compose-http.yaml -d
 ```
 
 2. Connect to your Docker container
@@ -22,13 +22,13 @@ Last Update: 11-Aug-2024
 
 3. Generate your dhparams file
 ```
-`cd /etc/nginx/ssl`
-`sudo openssl dhparam -out dhparams.pem 2048`
-`exit`
+cd /etc/nginx/ssl
+sudo openssl dhparam -out dhparams.pem 2048
+exit
 ```
 
 4. Bring the instance down
-`docker compose down`
+```docker compose down```
 
 5. Edit the `default.conf` and change the following parameters to match your installation
 - server_name
@@ -39,7 +39,7 @@ Last Update: 11-Aug-2024
 The `proxy_pass` value should be your Home Assistant IP and Port.
 
 6. Bring your Proxy online with SSL Configuration.
-`docker compose up -d`
+```docker compose up -d```
 
 ### References:
 1. [Community Guide Reference 1](https://community.home-assistant.io/t/reverse-proxy-using-nginx/196954)
