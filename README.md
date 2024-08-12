@@ -4,7 +4,7 @@
 **Last Update:** 11-Aug-2024
 
 ## Overview
-This guide provides step-by-step instructions to set up a reverse proxy for your Home Assistant installation using NGINX and Docker. The proxy is configured to secure your Home Assistant instance with SSL certificates.
+This guide provides step-by-step instructions to set up a reverse proxy for your [Home Assistant](https://www.home-assistant.io) installation using NGINX and Docker. The proxy is configured to secure your Home Assistant instance with SSL certificates.
 
 ## Prerequisites
 Before proceeding, ensure that the following are in place:
