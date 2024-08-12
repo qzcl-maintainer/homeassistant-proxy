@@ -1,0 +1,13 @@
+# Start Nginx proxy for Home Assistant
+name: homeassistant-proxy
+services:
+  # container_name: ha-proxy
+  nginx:
+    image: nginx
+    ports:
+      - "8124:443"
+    #  - "8125:80"
+    volumes:
+      - ./ssl:/etc/nginx/ssl
+      - ./default.conf:/etc/nginx/conf.d/default.conf:ro
+    restart: unless-stopped
