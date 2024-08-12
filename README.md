@@ -10,18 +10,22 @@ Last Update: 11-Aug-2024
 
 ### Instructions
 1. Start your docker container running on port 80 first
+```
 `cd /opt`
 `git clone https://github.com/qzcl-maintainer/homeassistant-proxy.git`
 `cd homeassistant-proxy`
 `docker compose -f compose-http.yaml -d`
+```
 
 2. Connect to your Docker container
-`docker container exec -it homeassistant-proxy-nginx-1 bash`
+```docker container exec -it homeassistant-proxy-nginx-1 bash```
 
 3. Generate your dhparams file
+```
 `cd /etc/nginx/ssl`
 `sudo openssl dhparam -out dhparams.pem 2048`
 `exit`
+```
 
 4. Bring the instance down
 `docker compose down`
