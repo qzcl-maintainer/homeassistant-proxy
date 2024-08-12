@@ -23,7 +23,7 @@ First, clone the repository containing the configuration files.
 ```bash
 cd /opt
 sudo git clone https://github.com/qzcl-maintainer/homeassistant-proxy.git
-sudo chown 777 /opt/homeassistant-proxy
+sudo chmod 777 /opt/homeassistant-proxy
 cd homeassistant-proxy
 mkdir ssl
 ```
