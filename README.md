@@ -10,7 +10,7 @@ This guide provides step-by-step instructions to set up a reverse proxy for your
 Before proceeding, ensure that the following are in place:
 1. **Home Assistant** is running and fully operational.
 2. **Docker** is installed and running on your system.
-3. SSL certificates have been generated using `certbot` and stored in the `.ssl` directory.
+3. SSL certificates have been generated using `certbot` and stored in the `./ssl` directory.
 
 ## Environment
 - **Home Assistant Version:** 2024.8.1
